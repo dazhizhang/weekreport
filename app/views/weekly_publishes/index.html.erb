@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Weekly Publishes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Publish date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @weekly_publishes.each do |weekly_publish| %>
+      <tr>
+        <td><%= weekly_publish.name %></td>
+        <td><%= weekly_publish.publish_date %></td>
+        <td><%= link_to 'Show', weekly_publish %></td>
+        <td><%= link_to 'Edit', edit_weekly_publish_path(weekly_publish) %></td>
+        <td><%= link_to 'Destroy', weekly_publish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Weekly publish', new_weekly_publish_path %>

@@ -1,0 +1,25 @@
+<%= form_for(@weekly_publish) do |f| %>
+  <% if @weekly_publish.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weekly_publish.errors.count, "error") %> prohibited this weekly_publish from being saved:</h2>
+
+      <ul>
+      <% @weekly_publish.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :publish_date %><br>
+    <%= f.date_select :publish_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
