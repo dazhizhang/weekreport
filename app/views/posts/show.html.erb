@@ -1,28 +1,30 @@
 <p id="notice"><%= notice %></p>
 
+<style> 
+/* .divcss5{ border:1px solid #000; width:300px; height:100px;overflow:hidden} */ 
+.divcss5 img{max-width:800px;_width:expression(this.width > 800 ? "800px" : this.width);} 
+</style> 
+
 <p>
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
-  <%= @post.content %>
+  <strong>Category:</strong>
+  <%= @post.category.name %>
 </p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @post.category %>
-</p>
 
 <p>
   <strong>Status:</strong>
   <%= @post.status %>
 </p>
 
+
 <p>
   <strong>Author:</strong>
-  <%= @post.author %>
+ <%= @post.user.email %> 
 </p>
 
 <p>
@@ -30,5 +32,28 @@
   <%= @post.edit_by %>
 </p>
 
+<p>
+<strong>Image:</strong>
+
+<div class="divcss5"> 
+<img src="<%= @post.avatar.url %>"  alt="" />
+</div>
+
+</p>
+
+<strong>Audio:</strong>
+</p>
+
+<% if @post.audiofile.url != nil %>
+<audio src="<%= @post.audiofile.url %>"  controls="controls">
+</audio>
+<% end %>
+
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= simple_format( @post.content.html_safe) %>
+</p></p></p></p>
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Post Listing', posts_path %>

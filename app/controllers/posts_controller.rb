@@ -1,32 +1,67 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  #before_action :set_post, only: [:show, :edit, :update, :destroy]
+ # before_action :authenticate_user!
+  #load_and_authorize_resource
+  
   # GET /posts
   # GET /posts.json
+
   def index
     @posts = Post.all
   end
 
+  # GET /posts
+  # GET /posts.json
+  def publish
+  # @posts = Post.all
+ @posts = Post.where( status: false)
+ #@posts = Post.where(status: true)
+  end
+
+def generatereport
+ 
+ if request.post?
+    activated_ids = params[:activated].collect {|id| id.to_i} if params[:activated]
+    seen_ids = params[:seen].collect {|id| id.to_i} if params[:seen]
+
+    if activated_ids
+      seen_ids.each do |id|
+        r = Post.find_by_id(id)
+        r.status = 1 #activated_ids.include?(id)
+        r.save
+      end
+    end
+  end
+
+
+end
+
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
   def new
+    @categories = Category.all
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /posts
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post[:status] = 0
 
     respond_to do |format|
+
+      # @post.avatar = params[:avatar]
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
@@ -69,6 +104,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :category_id, :status, :author, :edit_by)
+      params.require(:post).permit(:title, :content, :category_id, :status, :author, :edit_by, :avatar, :audiofile)
     end
+
 end

@@ -1,5 +1,34 @@
-<h1>New Post</h1>
+<h3>New Post</h3>
+<br/><br/><br/>
+<%= form_for @post, url: {action: "create"} do |f| %>
 
-<%= render 'form' %>
+Category 
+<select name="post[category_id]">
+ <option value="">Please select</option>
+<% @categories.each do |category| %>
+<option value=<%= category.id %>><%= category.name %></option>
+<% end %>
+</select><br/>
 
-<%= link_to 'Back', posts_path %>
+</p>
+ Title       <%= f.text_field :title , size: "60"%> <br/>
+ </p>
+
+ Image    
+<%= f.file_field :avatar%> 
+ <br/>
+ Audio    
+<%= f.file_field :audiofile%> 
+ <br/>
+  Content <br/><%= f.text_area :content, size: "120x12" %> <br/>
+ <br/>
+
+<%= f.submit "Create" %>
+
+<% end %>
+
+<br/>
+<%= link_to 'Go to Post Listing', posts_path %>
+
+
+

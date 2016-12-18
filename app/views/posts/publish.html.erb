@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Publish Posts</h3>
+***check posts and publish***
+<br><br><br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Category</th>
+      <th>Author</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+        <%= form_tag(controller: "posts", action: "generatereport", method: "post") do %>
+    <% @posts.each do |post| %> 
+  
+           <tr>  
+          <td><%= post.title %></td>
+         <td><%= post.content[0..100] %></td>
+        <td><%= post.category.name %></td>
+        <td><%= post.author %></td>
+
+          <td>
+          <%= hidden_field_tag('seen[]', post.id) -%>
+              <%= check_box_tag 'activated[]', post.id %>
+          </td>
+
+   <!--     <td><%= post.edit_by %></td>   -->
+        
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      
+    <% end %>
+    <%= submit_tag("Generate new report") %>
+    <% end %>
+    
+  </tbody>
+</table>
+
+<br>
+ 

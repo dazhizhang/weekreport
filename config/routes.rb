@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  resources :messages
-  resources :weekly_publishes
-  resources :posts
-  resources :categories
+  get 'user/index'
+
+  mount RailsAdmin::Engine => '/adminadmin', as: 'rails_admin'
+
   devise_for :users
+  resources :weekly_publishes
+  resources :posts do
+    get 'publish', on: :collection
+    post 'generatereport', on: :collection
+  end
+  resources :categories
+
+  # root 'posts#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -58,4 +67,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end
