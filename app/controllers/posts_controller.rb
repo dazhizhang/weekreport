@@ -1,13 +1,15 @@
 class PostsController < ApplicationController
-  #before_action :set_post, only: [:show, :edit, :update, :destroy]
- # before_action :authenticate_user!
-  #load_and_authorize_resource
+
+  # before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_user!
+  # load_and_authorize_resource
   
   # GET /posts
   # GET /posts.json
 
   def index
     @posts = Post.all
+    @users = User.all
   end
 
   # GET /posts

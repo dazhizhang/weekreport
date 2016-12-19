@@ -33,8 +33,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'active_model_serializers'
 
 gem 'devise'
-gem 'cancan'
-gem 'rails_admin'
+# gem 'cancan'
+# gem 'rails_admin'
 
 gem "twitter-bootstrap-rails"
 

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'user/index'
 
-  mount RailsAdmin::Engine => '/adminadmin', as: 'rails_admin'
 
   devise_for :users
   resources :weekly_publishes

@@ -21,7 +21,9 @@
         <td><%= post.title %></td>
         <td><%= post.content[0..100] %></td>
         <td><%= post.category.name %></td>
-        <td><%= post.user.email %></td>
+        <td><%=
+        # post.user.email
+         %></td>
 
           <td>
           <% if post.status  %>
@@ -29,7 +31,9 @@
            <% else %> 
          unpublished
        <%  end %>
+
      </td>
+
 
    <!--     <td><%= post.edit_by %></td>   -->
         <td><%= link_to 'Show', post %></td>
@@ -43,3 +47,8 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
+     Users
+      <% @users.each do |user| %>
+ <%= user.first_name %>
+      <%  end %>
